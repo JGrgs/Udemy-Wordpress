@@ -1,4 +1,12 @@
 <?php 
+
+function university_custom_rest() {
+	register_rest_field('post', 'authorName', array(
+		'get_callback' => function() {return get_the_author();}
+	));
+}
+
+add_action('rest_api_init', 'university_custom_rest');
 	
 	function pageBanner($args = NULL){
 
@@ -39,6 +47,9 @@
 		wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 		wp_enqueue_style('university_main_styles', get_stylesheet_uri(), NULL, microtime());
 
+		wp_localize_script('main-university-js', 'universityData', array(
+			'root_url' => get_site_url()
+		));
 	}
 	// right before outputting the code into the header area, run function university files. no need for () cause we're not calling the function at the moment, we're referring to the function that wordpress needs to run at a certain moment
 	add_action('wp_enqueue_scripts', 'university_files');
