@@ -13649,6 +13649,7 @@ function () {
         return _this.searchField.focus();
       }, 301);
       this.isOverlayOpen = true;
+      return false;
     }
   }, {
     key: "closeOverlay",
